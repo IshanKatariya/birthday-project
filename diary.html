@@ -32,7 +32,7 @@
           <div class="diary-spine-line"></div>
 
           <div class="diary-page diary-page--right" id="page-right">
-            <h3 class="diary-salutation">Dear you,</h3>
+            <h3 class="diary-salutation">Dear chottee,</h3>
             <p class="diary-letter">
               Some moments don't need a filter — they just need to be lived,
               felt, and quietly tucked away somewhere safe.<br><br>
@@ -74,30 +74,34 @@
 
   </div>
 
-  <div class="step-dots">
-    <span></span><span></span><span></span><span class="is-active"></span>
-  </div>
-
   <script>
     const book      = document.getElementById('diary-book');
     const coverWrap = document.getElementById('cover-wrap');
     const pageRight = document.getElementById('page-right');
+    const diaryBack = document.getElementById('diary-back');
     const hint      = document.getElementById('diary-hint');
     let state = 'closed';
 
-    coverWrap.addEventListener('click', () => {
+    coverWrap.addEventListener('pointerup', () => {
       if (state !== 'closed') return;
       state = 'open';
       book.classList.add('is-open');
       hint.textContent = 'tap the page to close ✦';
     });
 
-    pageRight.addEventListener('click', () => {
+    pageRight.addEventListener('pointerup', () => {
       if (state !== 'open') return;
       state = 'ended';
       book.classList.remove('is-open');
       book.classList.add('is-ended');
-      hint.textContent = 'the end ♡';
+      hint.textContent = 'tap the last page to close ✦';
+    });
+
+    diaryBack.addEventListener('pointerup', () => {
+      if (state !== 'ended') return;
+      state = 'closed';
+      book.classList.remove('is-ended');
+      hint.textContent = 'tap to open ✨';
     });
 
     /* Responsive scaling */
@@ -105,12 +109,12 @@
     function fitBook() {
       const scene  = document.getElementById('diary-scene');
       const availW = scene.clientWidth - 32;
-      const openW  = 560;
+      const openW  = 680;
       if (availW < openW) {
         const s = availW / openW;
         scaleWrap.style.transform       = 'scale(' + s + ')';
         scaleWrap.style.transformOrigin = 'top center';
-        scaleWrap.style.marginBottom    = -(420 * (1 - s)) + 'px';
+        scaleWrap.style.marginBottom    = -(510 * (1 - s)) + 'px';
       } else {
         scaleWrap.style.transform    = '';
         scaleWrap.style.marginBottom = '';
