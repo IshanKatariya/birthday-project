@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ask the memories</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page">
+  <div class="blob blob--tl"></div>
+
+  <!-- Top-right decorative image -->
+  <img src="assets/top-right-element.png" alt="" class="deco deco--tr">
+
+  <div class="chat-bar" style="margin-top:24px;">
+    <input id="chat-input" type="text" placeholder="Try “best memories of us”" />
+    <button class="btn" id="chat-submit">Search</button>
+  </div>
+  <button class="chip" id="chip-suggestion">best memories of us</button>
+
+  <div class="loading-dots" id="loading-dots">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="memory-grid" id="memory-grid">
+    <!-- EDIT: swap src on each img for your real photos in /assets -->
+    <div class="scratch-card" data-caption="Shivji approved 🔱📿🕉️">
+      <img src="assets/memory-1.jpeg" alt="">
+      <canvas></canvas>
+    </div>
+    <div class="scratch-card"
+      data-caption="Dreamt it, prayed for it, and finally achieved it — Ganpati Bappa at our place. 🤞🏻❤️🙏🏻">
+      <img src="assets/memory-2.jpeg" alt="">
+      <canvas></canvas>
+    </div>
+    <div class="scratch-card" data-caption="First diwali as as couple 🪔">
+      <img src="assets/memory-3.jpeg" alt="">
+      <canvas></canvas>
+    </div>
+    <div class="scratch-card" data-caption="From where our journey begin 🥰">
+      <img src="assets/memory-4.jpeg" alt="">
+      <canvas></canvas>
+    </div>
+    <div class="scratch-card"
+      data-caption="A year of us, celebrated with our favourite kind of work — being creative together. ❤️🎨">
+      <img src="assets/memory-5.jpeg" alt="">
+      <canvas></canvas>
+    </div>
+    <div class="scratch-card" data-caption="When the family starts seeing what you see 🥹❤️">
+      <img src="assets/memory-6.jpeg" alt="">
+      <canvas></canvas>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+    <div class="lightbox__content">
+      <img id="lightbox-img" src="" alt="">
+      <p id="lightbox-caption" class="lightbox__caption"></p>
+    </div>
+  </div>
+
+  <!-- Bottom tagline -->
+  <div class="mem-footer">
+    <div class="mem-footer__dots">
+      <span></span><span class="is-filled"></span><span class="is-filled is-big"></span>
+    </div>
+    <p class="mem-footer__text">same chapter, different memories ♡</p>
+  </div>
+
+  <a href="diary.html" class="next-page-btn next-page-btn--purple">
+    Next &nbsp;→
+  </a>
+
+  <!-- Bottom-right decorative image -->
+  <img src="assets/bottom-right.png" alt="" class="deco deco--br">
+
+  <div class="step-dots">
+    <span></span><span></span><span class="is-active"></span>
+  </div>
+
+  <script src="js/scratch.js"></script>
+  <script>
+    const input = document.getElementById('chat-input');
+    const submit = document.getElementById('chat-submit');
+    const chip = document.getElementById('chip-suggestion');
+    const loading = document.getElementById('loading-dots');
+    const grid = document.getElementById('memory-grid');
+    let revealedOnce = false;
+
+    function runSearch() {
+      if (revealedOnce) return;
+      loading.style.display = 'flex';
+      setTimeout(() => {
+        loading.style.display = 'none';
+        grid.classList.add('is-visible');
+        [...grid.querySelectorAll('.scratch-card')].forEach((card, i) => {
+          setTimeout(() => {
+            card.classList.add('is-shown');
+            initScratchCard(card);
+          }, i * 140);
+        });
+        revealedOnce = true;
+      }, 900);
+    }
+
+    submit.addEventListener('click', runSearch);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+    chip.addEventListener('click', () => { input.value = chip.textContent; runSearch(); });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCaption = document.getElementById('lightbox-caption');
+    const lbClose = document.getElementById('lightbox-close');
+
+    grid.addEventListener('click', e => {
+      const card = e.target.closest('.scratch-card');
+      if (!card || !card.classList.contains('is-shown')) return;
+      if (card.dataset.revealed !== 'true') return; // must be fully scratched first
+      const img = card.querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCaption.textContent = card.dataset.caption || '';
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </script>
+</body>
+
+</html>

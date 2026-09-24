@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Something's coming...</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page" id="countdown-page">
+  <div class="blob blob--tl"></div>
+  <div class="blob blob--br"></div>
+
+  <p style="font-family:'Baloo 2';font-weight:700;letter-spacing:.02em;color:var(--purple-deep);margin-bottom:18px;">
+    something's coming...
+  </p>
+
+  <div id="digits" style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;">
+    <!-- filled by countdown.js -->
+  </div>
+
+  <p id="burst-line" class="display" style="font-size:clamp(2rem,6vw,3.5rem);margin-top:34px;opacity:0;transition:opacity .5s ease;color:var(--candy);">
+    it's time!! 🎉
+  </p>
+
+  <div class="step-dots">
+    <span class="is-active"></span><span></span><span></span>
+  </div>
+
+  <script src="js/confetti.js"></script>
+  <script src="js/countdown.js"></script>
+</body>
+</html>

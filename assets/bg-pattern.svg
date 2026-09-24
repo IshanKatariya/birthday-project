@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+
+    <!-- Soft paper grain -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" result="noise"></feTurbulence>
+      <feColorMatrix in="noise" type="saturate" values="0"></feColorMatrix>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.05"></feFuncA>
+      </feComponentTransfer>
+    </filter>
+
+    <!-- Sparkle -->
+    <g id="sparkle">
+      <path d="M0-8L2-2L8 0L2 2L0 8L-2 2L-8 0L-2-2Z" fill="#8A63E8"></path>
+    </g>
+
+    <!-- Gold sparkle -->
+    <g id="goldSparkle">
+      <path d="M0-10L2-3L10 0L2 3L0 10L-2 3L-10 0L-2-3Z" fill="#E7BE46"></path>
+    </g>
+
+    <!-- Heart -->
+    <g id="heart">
+      <path d="M0 8 C-10-2 -8-12 0-6 C8-12 10-2 0 8Z" fill="#F29AC1"></path>
+    </g>
+
+    <!-- Tiny flower -->
+    <g id="flower">
+      <circle r="3" fill="#F7B6C9"></circle>
+      <circle cx="0" cy="-8" r="5" fill="#fff"></circle>
+      <circle cx="7" cy="-2" r="5" fill="#fff"></circle>
+      <circle cx="4" cy="7" r="5" fill="#fff"></circle>
+      <circle cx="-4" cy="7" r="5" fill="#fff"></circle>
+      <circle cx="-7" cy="-2" r="5" fill="#fff"></circle>
+      <circle r="3" fill="#F3C74F"></circle>
+    </g>
+
+    <!-- Bow -->
+    <g id="bow">
+      <path d="M-12-4 C-20-14 -8-22 -2-8
+               C-1-4 -5-2 -8 2
+               C-4 0 -2 2 0 6
+               C2 2 4 0 8 2
+               C5-2 1-4 2-8
+               C8-22 20-14 12-4
+               L0 0Z" fill="#A684F8"></path>
+    </g>
+
+    <!-- Hand drawn squiggle -->
+    <g id="squiggle">
+      <path d="M0 0 C8-6 16 6 24 0 S40-6 48 0" fill="none" stroke="#8A63E8" stroke-width="2.5" stroke-linecap="round"></path>
+    </g>
+
+  </defs>
+
+  <!-- Paper grain -->
+  <rect width="100%" height="100%" fill="transparent"></rect>
+  <rect width="100%" height="100%" filter="url(#grain)" opacity=".25"></rect>
+
+  <!-- Random doodles -->
+
+  <use href="#goldSparkle" x="70" y="80"></use>
+  <use href="#heart" x="260" y="120"></use>
+  <use href="#sparkle" x="520" y="70"></use>
+  <use href="#flower" x="770" y="110"></use>
+  <use href="#bow" x="1030" y="70"></use>
+
+  <use href="#squiggle" x="140" y="220"></use>
+  <use href="#heart" x="420" y="250"></use>
+  <use href="#goldSparkle" x="680" y="230"></use>
+  <use href="#sparkle" x="940" y="210"></use>
+
+  <use href="#flower" x="120" y="420"></use>
+  <use href="#heart" x="330" y="470"></use>
+  <use href="#sparkle" x="600" y="430"></use>
+  <use href="#goldSparkle" x="840" y="450"></use>
+  <use href="#bow" x="1070" y="410"></use>
+
+  <use href="#squiggle" x="220" y="620"></use>
+  <use href="#flower" x="470" y="640"></use>
+  <use href="#heart" x="760" y="620"></use>
+  <use href="#sparkle" x="1030" y="650"></use>
+
+  <use href="#goldSparkle" x="90" y="790"></use>
+  <use href="#heart" x="290" y="830"></use>
+  <use href="#flower" x="560" y="790"></use>
+  <use href="#sparkle" x="820" y="820"></use>
+  <use href="#goldSparkle" x="1100" y="790"></use>
+
+  <!-- Tiny filler dots -->
+  <g fill="#C8B6FF" opacity=".35">
+    <circle cx="180" cy="90" r="2"></circle>
+    <circle cx="430" cy="160" r="2"></circle>
+    <circle cx="610" cy="280" r="2"></circle>
+    <circle cx="970" cy="120" r="2"></circle>
+    <circle cx="1090" cy="300" r="2"></circle>
+    <circle cx="260" cy="390" r="2"></circle>
+    <circle cx="740" cy="360" r="2"></circle>
+    <circle cx="920" cy="520" r="2"></circle>
+    <circle cx="150" cy="710" r="2"></circle>
+    <circle cx="650" cy="760" r="2"></circle>
+    <circle cx="980" cy="760" r="2"></circle>
+  </g>
+
+</svg>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Diary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page">
+  <div class="blob blob--tl"></div>
+  <img src="assets/top-right-element.png" alt="" class="deco deco--tr">
+  <img src="assets/bottom-right.png" alt="" class="deco deco--br">
+
+  <!-- ── Diary scene ───────────────────────────────── -->
+  <div class="diary-scene" id="diary-scene">
+
+    <p class="diary-hint" id="diary-hint">tap to open ✨</p>
+
+    <!-- scale wrapper — JS scales this on small screens -->
+    <div class="diary-scale-wrap" id="diary-scale-wrap">
+      <div class="diary-book" id="diary-book">
+
+        <!-- ① Inner spread (always rendered behind the cover) -->
+        <div class="diary-spread">
+
+          <div class="diary-page diary-page--left">
+            <img src="assets/memory-3.jpeg" alt="our memory" class="diary-left-img">
+          </div>
+
+          <div class="diary-spine-line"></div>
+
+          <div class="diary-page diary-page--right" id="page-right">
+            <h3 class="diary-salutation">Dear you,</h3>
+            <p class="diary-letter">
+              Some moments don't need a filter — they just need to be lived,
+              felt, and quietly tucked away somewhere safe.<br><br>
+              I keep thinking about how naturally we stumbled into each
+              other's lives. No grand entrance, just two people finding
+              their way to the same page, at exactly the right time.<br><br>
+              Every inside joke nobody else would understand,
+              every comfortable silence that never felt awkward,
+              every unplanned detour that somehow became a favourite
+              memory — I've collected them all here, in this little diary.<br><br>
+              You make ordinary days feel like something worth
+              remembering. And on your birthday, I want you to know:
+              I'm grateful every single day that our stories overlap
+              the way they do.<br><br>
+              Here's to every page still left to write together. 🌸
+            </p>
+            <p class="diary-sign">— always yours ♡</p>
+            <p class="diary-close-hint">tap to close ✦</p>
+          </div>
+
+        </div>
+
+        <!-- ② Front cover (flips open on click) -->
+        <div class="diary-cover-wrap" id="cover-wrap">
+          <div class="cover-face cover-face--front">
+            <img src="assets/diary-front-cover.jpeg" alt="Our Story" class="cover-img">
+          </div>
+          <div class="cover-face cover-face--back"></div>
+        </div>
+
+        <!-- ③ Back cover -->
+        <div class="diary-back" id="diary-back">
+          <p class="back-text">the end,<br>for now</p>
+          <p class="back-heart">♡</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="step-dots">
+    <span></span><span></span><span></span><span class="is-active"></span>
+  </div>
+
+  <script>
+    const book      = document.getElementById('diary-book');
+    const coverWrap = document.getElementById('cover-wrap');
+    const pageRight = document.getElementById('page-right');
+    const hint      = document.getElementById('diary-hint');
+    let state = 'closed';
+
+    coverWrap.addEventListener('click', () => {
+      if (state !== 'closed') return;
+      state = 'open';
+      book.classList.add('is-open');
+      hint.textContent = 'tap the page to close ✦';
+    });
+
+    pageRight.addEventListener('click', () => {
+      if (state !== 'open') return;
+      state = 'ended';
+      book.classList.remove('is-open');
+      book.classList.add('is-ended');
+      hint.textContent = 'the end ♡';
+    });
+
+    /* Responsive scaling */
+    const scaleWrap = document.getElementById('diary-scale-wrap');
+    function fitBook() {
+      const scene  = document.getElementById('diary-scene');
+      const availW = scene.clientWidth - 32;
+      const openW  = 560;
+      if (availW < openW) {
+        const s = availW / openW;
+        scaleWrap.style.transform       = 'scale(' + s + ')';
+        scaleWrap.style.transformOrigin = 'top center';
+        scaleWrap.style.marginBottom    = -(420 * (1 - s)) + 'px';
+      } else {
+        scaleWrap.style.transform    = '';
+        scaleWrap.style.marginBottom = '';
+      }
+    }
+    window.addEventListener('resize', fitBook);
+    fitBook();
+  </script>
+</body>
+
+</html>

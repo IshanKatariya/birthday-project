@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page">
+  <div class="blob blob--tl"></div>
+  <div class="blob blob--br"></div>
+
+  <!-- <h1 class="display" style="font-size:clamp(2.6rem,8vw,4.4rem);color:var(--candy);-webkit-text-stroke:2px var(--ink);">
+    Happy Birthday!
+  </h1> -->
+  <img src="assets/happy-b-dtext.png" alt="" width="300px">
+
+  <div class="video-frame">
+    <video id="bday-video" controls poster="assets/video-poster.png">
+      <source src="assets/video.mp4" type="video/mp4">
+    </video>
+    <div class="video-placeholder" id="video-placeholder">
+      Drop your video at <code>assets/video.mp4</code> — this placeholder disappears once it plays.
+    </div>
+    <a class="btn btn--pink next-btn" href="memories.html">Next →</a>
+  </div>
+
+  <div class="step-dots">
+    <span></span><span class="is-active"></span><span></span>
+  </div>
+
+  <script>
+    const video = document.getElementById('bday-video');
+    const placeholder = document.getElementById('video-placeholder');
+    video.addEventListener('loadeddata', () => placeholder.style.display = 'none');
+    video.addEventListener('error', () => placeholder.style.display = 'flex');
+  </script>
+</body>
+
+</html>
